@@ -11,7 +11,7 @@ public abstract class CrossoverAlgorithm {
 	public List<Individual> crossover(List<Individual> selectedIndividualsForCrossover){
 
         List<Individual> ans = new ArrayList<>(selectedIndividualsForCrossover.size());
-
+        
         for(int i=0;i<selectedIndividualsForCrossover.size();i+=2){
             Individual i1 = selectedIndividualsForCrossover.get(i);
             Individual i2 = selectedIndividualsForCrossover.get(i+1);

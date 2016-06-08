@@ -10,8 +10,14 @@ import api.algorithm.mutation.MutationAlgorithm;
 import api.algorithm.mutation.SingleGenMutation;
 import api.algorithm.replacement.ReplacementAlgorithm;
 import api.algorithm.replacement.SeparateRandomReplacement;
+import api.algorithm.selection.CombineSelection;
+import api.algorithm.selection.DeterministicTournament;
 import api.algorithm.selection.Elitism;
+import api.algorithm.selection.ProbabilisticTournament;
+import api.algorithm.selection.RankingSelection;
+import api.algorithm.selection.Rulet;
 import api.algorithm.selection.SelectionAlgorithm;
+import api.algorithm.selection.UniversalSelection;
 import api.configuration.Configuration;
 
 import java.util.ArrayList;
@@ -19,9 +25,16 @@ import java.util.List;
 
 public class SwitchesExample {
 
-    private static SelectionAlgorithm selectionAlgorithm = new Elitism(6);
+    private static SelectionAlgorithm selectionAlgorithmOne = new Elitism(2);
+    private static SelectionAlgorithm selectionAlgorithmTwo = new RankingSelection(4);
+    private static List<SelectionAlgorithm> selectionAlgorithms = new ArrayList<>();
+    static{
+    	selectionAlgorithms.add(selectionAlgorithmOne);
+    	selectionAlgorithms.add(selectionAlgorithmTwo);
+    }
+    private static SelectionAlgorithm selectionAlgorithmThree = new CombineSelection(selectionAlgorithms);
     private static CrossoverAlgorithm crossoverAlgorithm = new OnePointCrossover();
-    private static MutationAlgorithm mutationAlgorithm = new SingleGenMutation(0.3);
+    private static MutationAlgorithm mutationAlgorithm = new SingleGenMutation(0.03);
     private static ReplacementAlgorithm replacementAlgorithm = new SeparateRandomReplacement(3);
     private static FitnessAlgorithm fitnessAlgorithm = new SwitchFitness();
     private static List<Integer> rangeOfGens = new ArrayList<>();
@@ -35,7 +48,7 @@ public class SwitchesExample {
     }
 
     public static void main(String[] args){
-        Configuration configuration = new Configuration(selectionAlgorithm,crossoverAlgorithm,mutationAlgorithm,replacementAlgorithm,fitnessAlgorithm,rangeOfGens,poblationSize);
+        Configuration configuration = new Configuration(selectionAlgorithmThree,crossoverAlgorithm,mutationAlgorithm,replacementAlgorithm,fitnessAlgorithm,rangeOfGens,poblationSize);
 
         configuration.addEndCondition(new GoodEnoughFitnessCondition(961));
         //configuration.addEndCondition(new MaximumGenerationsCondition(10));
