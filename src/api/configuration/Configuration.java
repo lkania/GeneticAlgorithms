@@ -6,6 +6,7 @@ import api.algorithm.fitness.FitnessAlgorithm;
 import api.algorithm.mutation.MutationAlgorithm;
 import api.algorithm.replacement.ReplacementAlgorithm;
 import api.algorithm.selection.SelectionAlgorithm;
+import api.model.gen.GenFactory;
 import api.model.individual.Individual;
 
 import java.util.LinkedList;
@@ -21,8 +22,9 @@ public class Configuration {
     private FitnessAlgorithm fitnessAlgorithm;
     private List<Integer> rangeOfGens;
     private int poblationSize;
+    private GenFactory genFactory;
 
-    public Configuration(SelectionAlgorithm selectionAlgorithm, CrossoverAlgorithm crossoverAlgorithm, MutationAlgorithm mutationAlgorithm, ReplacementAlgorithm replacementAlgorithm, FitnessAlgorithm fitnessAlgorithm, List<Integer> rangeOfGens, int poblationSize) {
+    public Configuration(SelectionAlgorithm selectionAlgorithm, CrossoverAlgorithm crossoverAlgorithm, MutationAlgorithm mutationAlgorithm, ReplacementAlgorithm replacementAlgorithm, FitnessAlgorithm fitnessAlgorithm, List<Integer> rangeOfGens, int poblationSize,GenFactory genFactory) {
         this.crossoverAlgorithm = crossoverAlgorithm;
         this.mutationAlgorithm = mutationAlgorithm;
         this.replacementAlgorithm = replacementAlgorithm;
@@ -30,6 +32,7 @@ public class Configuration {
         this.fitnessAlgorithm = fitnessAlgorithm;
         this.rangeOfGens = rangeOfGens;
         this.poblationSize = poblationSize;
+        this.genFactory=genFactory;
     }
 
 
@@ -72,5 +75,9 @@ public class Configuration {
 
     public int getPoblationSize() {
         return poblationSize;
+    }
+    
+    public GenFactory getGenFactory(){
+    	return genFactory;
     }
 }

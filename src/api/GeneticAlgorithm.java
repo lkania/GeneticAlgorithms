@@ -7,6 +7,7 @@ import api.algorithm.replacement.ReplacementAlgorithm;
 import api.algorithm.selection.SelectionAlgorithm;
 import api.configuration.Configuration;
 import api.model.gen.Gen;
+import api.model.gen.GenFactory;
 import api.model.individual.Individual;
 
 import java.util.LinkedList;
@@ -30,6 +31,7 @@ public class GeneticAlgorithm {
         
         ReplacementAlgorithm replacementAlgorithm = configuration.getReplacementAlgorithm();
 
+        GenFactory genFactory = configuration.getGenFactory();
         
         while (!algorithmEnded(configuration, poblation)) {
 
@@ -37,7 +39,7 @@ public class GeneticAlgorithm {
 
             List<Individual> crossoveredIndividuals = crossoverAlgorithm.crossover(selectedIndividualsForCrossover);
 
-            mutationAlgorithm.mutate(crossoveredIndividuals);
+            mutationAlgorithm.mutate(crossoveredIndividuals, genFactory);
 
             replacementAlgorithm.replace(crossoveredIndividuals, poblation);
 

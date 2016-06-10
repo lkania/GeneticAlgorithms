@@ -24,6 +24,7 @@ import api.algorithm.selection.CombineSelection;
 import api.algorithm.selection.Elitism;
 import api.algorithm.selection.SelectionAlgorithm;
 import api.configuration.Configuration;
+import api.model.gen.GenFactory;
 import graph.MaxFitnessByGeneration;
 import graph.MeanFitnessByGeneration;
 
@@ -50,9 +51,11 @@ public class SwitchesExample {
             rangeOfGens.add(1);
         }
     }
+    
+    private static GenFactory genFactory=new SwitchesGenFactory(rangeOfGens);
 
     public static void main(String[] args){
-        Configuration configuration = new Configuration(selectionAlgorithmThree,crossoverAlgorithm,mutationAlgorithm,replacementAlgorithm,fitnessAlgorithm,rangeOfGens,poblationSize);
+        Configuration configuration = new Configuration(selectionAlgorithmThree,crossoverAlgorithm,mutationAlgorithm,replacementAlgorithm,fitnessAlgorithm,rangeOfGens,poblationSize,genFactory);
 
        // configuration.addEndCondition(new GoodEnoughFitnessCondition(961));
         //configuration.addEndCondition(new MaximumGenerationsCondition(10));

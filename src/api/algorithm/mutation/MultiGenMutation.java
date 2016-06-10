@@ -2,6 +2,7 @@ package api.algorithm.mutation;
 
 
 import api.model.gen.Gen;
+import api.model.gen.GenFactory;
 import api.model.individual.Individual;
 
 import java.util.List;
@@ -17,15 +18,13 @@ public class MultiGenMutation extends MutationAlgorithm{
     }
 
     @Override
-    public void mutate(Individual individual) {
+    public void mutate(Individual individual,GenFactory genFactory) {
         List<Gen> gens = individual.getGens();
 
         for(int i=0;i<gens.size();i+=genGroupSize){
             if(Math.random()<probability){
                 for(int j=i;j<i+genGroupSize;j++) {
-                    Gen gen = gens.get(j);
-                    int newGenIndex = (int) ((gen.getMaxPossibleValue() + 1) * Math.random());
-                    Gen newGen = new Gen(newGenIndex, gen.getMaxPossibleValue());
+                	Gen newGen = genFactory.getRandomGen(j);
                     gens.set(j,newGen);
                 }
             }
