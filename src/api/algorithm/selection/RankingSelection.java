@@ -9,6 +9,10 @@ import api.model.individual.Individual;
 
 public class RankingSelection extends SelectionAlgorithm {
 
+	private static double CONSTANT_A=1;
+	private static double CONSTANT_B=0.1;
+	
+	
 	public RankingSelection(int numberOfSelected) {
 		super(numberOfSelected);
 	}
@@ -24,8 +28,10 @@ public class RankingSelection extends SelectionAlgorithm {
 		int randomIndex = 0;
 		
 		for(int i = 0; i < aux.size(); i++ ){
-			probability += ((i+1))/aux.size(); 
-			while(randomNumbers.get(randomIndex) > probability ){
+			//probability += (aux.size()-i)/(aux.size()*(aux.size()+1)*0.5); 
+			probability += ((aux.size()-i)*CONSTANT_B+CONSTANT_A)/(aux.size()*(CONSTANT_A+CONSTANT_B*(aux.size()+1)*0.5)); 
+
+			while(randomNumbers.get(randomIndex) < probability ){
 				res.add(aux.get(i));
 				randomIndex ++;
 				if(randomIndex==getNumberOfSelected()){

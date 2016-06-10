@@ -50,4 +50,34 @@ public class Individual implements Comparable<Individual> {
 		return fitnessAlgorithm;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((gens == null) ? 0 : gens.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Individual other = (Individual) obj;
+		if (gens == null) {
+			if (other.gens != null)
+				return false;
+		} else{
+			for(int i=0;i<gens.size();i++){
+				if(!gens.get(i).equals(other.getGens().get(i)))
+					return false;
+			}
+		}
+		return true;
+	}
+
+	
 }

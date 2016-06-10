@@ -22,22 +22,22 @@ public class GeneticAlgorithm {
 
         notifyInitialPoblation(poblation);
 
-        while (!algorithmEnded(configuration, poblation)) {
+        SelectionAlgorithm selectionAlgorithmForCrossover = configuration.getSelectionAlgorithm();
 
-            SelectionAlgorithm selectionAlgorithmForCrossover = configuration.getSelectionAlgorithm();
+        CrossoverAlgorithm crossoverAlgorithm = configuration.getCrossoverAlgorithm();
+        
+        MutationAlgorithm mutationAlgorithm = configuration.getMutationAlgorithm();
+        
+        ReplacementAlgorithm replacementAlgorithm = configuration.getReplacementAlgorithm();
+
+        
+        while (!algorithmEnded(configuration, poblation)) {
 
             List<Individual> selectedIndividualsForCrossover = selectionAlgorithmForCrossover.select(poblation);
 
-            CrossoverAlgorithm crossoverAlgorithm = configuration.getCrossoverAlgorithm();
-
             List<Individual> crossoveredIndividuals = crossoverAlgorithm.crossover(selectedIndividualsForCrossover);
 
-            MutationAlgorithm mutationAlgorithm = configuration.getMutationAlgorithm();
-
             mutationAlgorithm.mutate(crossoveredIndividuals);
-
-
-            ReplacementAlgorithm replacementAlgorithm = configuration.getReplacementAlgorithm();
 
             replacementAlgorithm.replace(crossoveredIndividuals, poblation);
 
