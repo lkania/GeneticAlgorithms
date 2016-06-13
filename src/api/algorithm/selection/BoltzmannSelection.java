@@ -8,59 +8,57 @@ import api.model.individual.Individual;
 
 public class BoltzmannSelection extends Rulet {
 
-	private int generation=1;
+	private int generation = 1;
 	private double temperature;
-	
+
 	public BoltzmannSelection(int numberOfSelected, double temperature) {
 		super(numberOfSelected);
-		this.temperature=temperature;
-		
+		this.temperature = temperature;
+
 	}
 
 	@Override
 	public List<Individual> select(List<Individual> poblation) {
-		
-	List<Individual> individuals = new ArrayList<Individual>(getNumberOfSelected());
-		
-		double meanBoltzmann = getMeanBoltzmann(poblation);
-		
-		List<Double> randomAccumulatedFitness = getRandomValues(getNumberOfSelected());	
-				
-		
+
+		List<Individual> individuals = new ArrayList<Individual>(getNumberOfSelected());
+
+		double partialBoltzmann = getTotalBoltzmann(poblation);
+
+		List<Double> randomAccumulatedFitness = getRandomValues(getNumberOfSelected());
+
 		Collections.sort(randomAccumulatedFitness);
-		
+
 		int randomIndex = 0;
-		double accumulatedRelativeFitness = 0;
-		for(Individual individual:poblation){
-			accumulatedRelativeFitness+=Math.exp(individual.getFitness()/getTemperature())/meanBoltzmann;
-			while(randomAccumulatedFitness.get(randomIndex) < accumulatedRelativeFitness){
+		double probabilityOfBeignSelected = 0;
+		for (Individual individual : poblation) {
+			probabilityOfBeignSelected += Math.exp(individual.getFitness() / getTemperature()) / partialBoltzmann;
+			while (randomAccumulatedFitness.get(randomIndex) < probabilityOfBeignSelected) {
 				individuals.add(individual);
-				randomIndex ++;
-				if(randomIndex==getNumberOfSelected()){
+				randomIndex++;
+				if (randomIndex == getNumberOfSelected()) {
 					generation++;
 					return individuals;
 				}
-				
+
 			}
-			
+
 		}
-		
-		
+
 		generation++;
 		return individuals;
-		
+
 	}
 
-	private double getMeanBoltzmann(List<Individual> poblation) {
-		double accumulate=0;
-		for(Individual individual: poblation){
-			accumulate+=Math.exp(individual.getFitness()/getTemperature());
+	private double getTotalBoltzmann(List<Individual> poblation) {
+		double accumulate = 0;
+		for (Individual individual : poblation) {
+			accumulate += Math.exp(individual.getFitness() / getTemperature());
 		}
-		return accumulate/poblation.size() ;
+		return accumulate;
 	}
 
 	private double getTemperature() {
-		return temperature*Math.exp(-generation);
+		return temperature * Math.exp(-generation);
 	}
 
 }

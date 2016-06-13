@@ -2,20 +2,14 @@ package api.model.gen;
 
 public class Gen {
 
-	private int maxPossibleValue;
 	private int currentValue;
 
-    public Gen(int currentValue,int maxPossibleValue){
+    public Gen(int currentValue){
         this.currentValue=currentValue;
-        this.maxPossibleValue=maxPossibleValue;
     }
 
 	public int getCurrentValue(){
 		return currentValue;
-	}
-	
-	public int getMaxPossibleValue(){
-		return maxPossibleValue;
 	}
 
 	@Override
@@ -23,7 +17,6 @@ public class Gen {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + currentValue;
-		result = prime * result + maxPossibleValue;
 		return result;
 	}
 
@@ -37,8 +30,6 @@ public class Gen {
 			return false;
 		Gen other = (Gen) obj;
 		if (currentValue != other.currentValue)
-			return false;
-		if (maxPossibleValue != other.maxPossibleValue)
 			return false;
 		return true;
 	}

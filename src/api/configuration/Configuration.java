@@ -20,17 +20,15 @@ public class Configuration {
     private SelectionAlgorithm selectionAlgorithm;
     private List<EndCondition> endConditions = new LinkedList<>();
     private FitnessAlgorithm fitnessAlgorithm;
-    private List<Integer> rangeOfGens;
     private int poblationSize;
     private GenFactory genFactory;
 
-    public Configuration(SelectionAlgorithm selectionAlgorithm, CrossoverAlgorithm crossoverAlgorithm, MutationAlgorithm mutationAlgorithm, ReplacementAlgorithm replacementAlgorithm, FitnessAlgorithm fitnessAlgorithm, List<Integer> rangeOfGens, int poblationSize,GenFactory genFactory) {
+    public Configuration(SelectionAlgorithm selectionAlgorithm, CrossoverAlgorithm crossoverAlgorithm, MutationAlgorithm mutationAlgorithm, ReplacementAlgorithm replacementAlgorithm, FitnessAlgorithm fitnessAlgorithm,  int poblationSize,GenFactory genFactory) {
         this.crossoverAlgorithm = crossoverAlgorithm;
         this.mutationAlgorithm = mutationAlgorithm;
         this.replacementAlgorithm = replacementAlgorithm;
         this.selectionAlgorithm = selectionAlgorithm;
         this.fitnessAlgorithm = fitnessAlgorithm;
-        this.rangeOfGens = rangeOfGens;
         this.poblationSize = poblationSize;
         this.genFactory=genFactory;
     }
@@ -68,10 +66,6 @@ public class Configuration {
 	public FitnessAlgorithm getFitnessAlgorithm() {
 		return fitnessAlgorithm;
 	}
-
-    public List<Integer> getRangeOfGens() {
-        return rangeOfGens;
-    }
 
     public int getPoblationSize() {
         return poblationSize;
