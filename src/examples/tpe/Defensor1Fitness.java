@@ -1,4 +1,4 @@
-package example.tpe;
+package examples.tpe;
 
 import java.util.List;
 
@@ -11,6 +11,11 @@ public class Defensor1Fitness implements FitnessAlgorithm {
 	@Override
 	public double getFitness(Individual individual) {
 		List<Gen> gens=individual.getGens();
+		return getFitness(gens);
+		
+	}
+	
+	public static double getFitness(List<Gen> gens){
 		double force=0;
 		double agility=0;
 		double skill=0;
@@ -47,7 +52,6 @@ public class Defensor1Fitness implements FitnessAlgorithm {
 		double fitness=0.1*attack+0.9*defense;
 		
 		return fitness;
-		
 		
 	}
 	

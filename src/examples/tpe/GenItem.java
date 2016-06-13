@@ -1,4 +1,4 @@
-package example.tpe;
+package examples.tpe;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,8 +8,8 @@ import api.model.gen.Gen;
 public class GenItem extends Gen{
 	private Map<Integer,Item> items = new HashMap<>();
 	
-	public GenItem(int currentValue, int maxPossibleValue,Map<Integer,Item> items) {
-		super(currentValue, maxPossibleValue);
+	public GenItem(int currentValue, Map<Integer,Item> items) {
+		super(currentValue);
 		this.items=items;
 	}
 

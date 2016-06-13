@@ -6,19 +6,13 @@ import java.util.List;
 
 import api.GeneticAlgorithm;
 import api.algorithm.condition.ContentCondition;
-import api.algorithm.condition.GoodEnoughFitnessCondition;
-import api.algorithm.condition.StructureCondition;
 import api.algorithm.crossover.CrossoverAlgorithm;
 import api.algorithm.crossover.OnePointCrossover;
-import api.algorithm.crossover.UniformCrossover;
 import api.algorithm.fitness.FitnessAlgorithm;
 import api.algorithm.mutation.MutationAlgorithm;
 import api.algorithm.mutation.MutationClassic;
-import api.algorithm.mutation.SingleGenMutation;
 import api.algorithm.replacement.RandomBetweenAllReplacement;
-import api.algorithm.replacement.ReplaceAll;
 import api.algorithm.replacement.ReplacementAlgorithm;
-import api.algorithm.replacement.SeparateRandomReplacement;
 import api.algorithm.selection.BoltzmannSelection;
 import api.algorithm.selection.CombineSelection;
 import api.algorithm.selection.Elitism;
@@ -35,7 +29,7 @@ public class SwitchesExample {
     private static List<SelectionAlgorithm> selectionAlgorithms = new ArrayList<>();
     static{
     	selectionAlgorithms.add(selectionAlgorithmOne);
-    //	selectionAlgorithms.add(selectionAlgorithmTwo);
+    	selectionAlgorithms.add(selectionAlgorithmTwo);
     }
     private static SelectionAlgorithm selectionAlgorithmThree = new CombineSelection(selectionAlgorithms);
     private static CrossoverAlgorithm crossoverAlgorithm = new OnePointCrossover();
@@ -55,7 +49,7 @@ public class SwitchesExample {
     private static GenFactory genFactory=new SwitchesGenFactory(rangeOfGens);
 
     public static void main(String[] args){
-        Configuration configuration = new Configuration(selectionAlgorithmThree,crossoverAlgorithm,mutationAlgorithm,replacementAlgorithm,fitnessAlgorithm,rangeOfGens,poblationSize,genFactory);
+        Configuration configuration = new Configuration(selectionAlgorithmThree,crossoverAlgorithm,mutationAlgorithm,replacementAlgorithm,fitnessAlgorithm,poblationSize,genFactory);
 
        // configuration.addEndCondition(new GoodEnoughFitnessCondition(961));
         //configuration.addEndCondition(new MaximumGenerationsCondition(10));
