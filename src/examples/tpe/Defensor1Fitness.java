@@ -1,4 +1,4 @@
-package example.tpe;
+package examples.tpe;
 
 import java.util.List;
 

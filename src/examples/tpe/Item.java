@@ -1,4 +1,4 @@
-package example.tpe;
+package examples.tpe;
 
 public class Item {
 	private double force;

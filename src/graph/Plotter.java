@@ -1,19 +1,11 @@
 package graph;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import org.knowm.xchart.BitmapEncoder;
-import org.knowm.xchart.XChartPanel;
-import org.knowm.xchart.XYChart;
-import org.knowm.xchart.XYChartBuilder;
-import org.knowm.xchart.BitmapEncoder.BitmapFormat;
-import org.knowm.xchart.style.Styler.LegendPosition;
 
 public abstract class Plotter {
 
