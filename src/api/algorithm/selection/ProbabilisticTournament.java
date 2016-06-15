@@ -8,7 +8,7 @@ import api.model.individual.Individual;
 public class ProbabilisticTournament extends DeterministicTournament {
 
 	public ProbabilisticTournament(int numberOfSelected) {
-		super(numberOfSelected);
+		super(numberOfSelected,(int)(numberOfSelected*1.5));
 	}
 	
 	protected List<Individual> selectRandomContestants(List<Individual> poblation){

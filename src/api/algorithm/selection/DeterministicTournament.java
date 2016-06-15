@@ -7,12 +7,6 @@ import api.model.individual.Individual;
 
 public class DeterministicTournament extends SelectionAlgorithm{
 	private int numberOfIndividuals = 0;
-
-	public DeterministicTournament(int numberOfSelected) {
-		super(numberOfSelected);
-		numberOfIndividuals = (int)(numberOfSelected *1.5);
-		
-	}
 	
 	public DeterministicTournament(int numberOfSelected, int numberOfIndividuals) {
 		super(numberOfSelected);

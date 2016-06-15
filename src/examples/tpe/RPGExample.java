@@ -7,51 +7,52 @@ import java.util.List;
 import java.util.Map;
 
 import api.GeneticAlgorithm;
-import api.algorithm.condition.ContentCondition;
-import api.algorithm.condition.GoodEnoughFitnessCondition;
 import api.algorithm.condition.MaximumGenerationsCondition;
-import api.algorithm.condition.StructureCondition;
 import api.algorithm.crossover.CrossoverAlgorithm;
-import api.algorithm.crossover.OnePointCrossover;
+import api.algorithm.crossover.TwoPointCrossover;
 import api.algorithm.fitness.FitnessAlgorithm;
+import api.algorithm.mutation.MultiGenMutation;
 import api.algorithm.mutation.MutationAlgorithm;
-import api.algorithm.mutation.MutationClassic;
-import api.algorithm.replacement.RandomBetweenAllReplacement;
 import api.algorithm.replacement.ReplacementAlgorithm;
+import api.algorithm.replacement.SeparateRandomReplacement;
 import api.algorithm.selection.BoltzmannSelection;
 import api.algorithm.selection.CombineSelection;
 import api.algorithm.selection.Elitism;
 import api.algorithm.selection.SelectionAlgorithm;
+import api.algorithm.selection.UniversalSelection;
 import api.configuration.Configuration;
 import api.model.gen.GenFactory;
-import examples.switches.SwitchFitness;
-import examples.switches.SwitchesPrinter;
 import examples.tpe.reader.ItemsReader;
 import graph.MaxFitnessByGeneration;
 import graph.MeanFitnessByGeneration;
 
 public class RPGExample {
 
-	private static SelectionAlgorithm selectionAlgorithmOne = new Elitism(30);
-	private static SelectionAlgorithm selectionAlgorithmTwo = new BoltzmannSelection(70, 60.0);
+	//private static SelectionAlgorithm selectionAlgorithmOne = new DeterministicTournament(40,20);
+	private static SelectionAlgorithm selectionAlgorithmTwo = new BoltzmannSelection(40,100);
+	private static SelectionAlgorithm selectionAlgoritmFour = new UniversalSelection(40);
+	private static SelectionAlgorithm selectionAlgoritmFive = new Elitism(120);
+	
 
 	private static List<SelectionAlgorithm> selectionAlgorithms = new ArrayList<>();
 	static {
-		selectionAlgorithms.add(selectionAlgorithmOne);
+		//selectionAlgorithms.add(selectionAlgorithmOne);
 		selectionAlgorithms.add(selectionAlgorithmTwo);
+		selectionAlgorithms.add(selectionAlgoritmFour);
+		selectionAlgorithms.add(selectionAlgoritmFive);
 	}
 
 	private static SelectionAlgorithm selectionAlgorithmThree = new CombineSelection(selectionAlgorithms);
 
-	private static CrossoverAlgorithm crossoverAlgorithm = new OnePointCrossover();
+	private static CrossoverAlgorithm crossoverAlgorithm = new TwoPointCrossover();
 
-	private static MutationAlgorithm mutationAlgorithm = new MutationClassic(0.3);
+	private static MutationAlgorithm mutationAlgorithm = new MultiGenMutation(0.05,2);
 
-	private static ReplacementAlgorithm replacementAlgorithm = new RandomBetweenAllReplacement();
+	private static ReplacementAlgorithm replacementAlgorithm = new SeparateRandomReplacement(200);
 
 	private static FitnessAlgorithm fitnessAlgorithm = new Defensor1Fitness();
 
-	private static int poblationSize = 100;
+	private static int poblationSize = 1000;
 
 	private static GenFactory genFactory;
 
@@ -80,7 +81,7 @@ public class RPGExample {
 				replacementAlgorithm, fitnessAlgorithm, poblationSize, genFactory);
 
 		//configuration.addEndCondition(new GoodEnoughFitnessCondition(961));
-		configuration.addEndCondition(new MaximumGenerationsCondition(120));
+		configuration.addEndCondition(new MaximumGenerationsCondition(20000));
 	//	configuration.addEndCondition(new StructureCondition());
 //		configuration.addEndCondition(new ContentCondition(5));
 
