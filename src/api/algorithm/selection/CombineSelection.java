@@ -7,9 +7,6 @@ import api.model.individual.Individual;
 
 public class CombineSelection extends SelectionAlgorithm{
 	
-	public CombineSelection(int numberOfSelected) {
-		super(numberOfSelected);
-	}
 
 	private List<SelectionAlgorithm> algorithms = null;
 	

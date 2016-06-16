@@ -38,7 +38,7 @@ public abstract class Plotter {
 		chart = new XYChartBuilder().width(600).height(400).title(plotName).xAxisTitle(xAxis)
 				.yAxisTitle(yAxis).build();
 
-		chart.getStyler().setLegendPosition(LegendPosition.OutsideE);
+		chart.getStyler().setLegendPosition(LegendPosition.InsideSE);
 		frame = new JFrame("Advanced Example");
 	    javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
@@ -65,12 +65,13 @@ public abstract class Plotter {
 	}
 	
 	public void plot() throws IOException {
-		chart.removeSeries(serieName);
+		chart.removeSeries(getSerieName());
 		double[] errorBars=getErrorBars();
+		modifySerieName();
 		if(errorBars!=null)	
-			chart.addSeries(serieName, getXValues(), getYValues(),errorBars);
+			chart.addSeries(getSerieName(), getXValues(), getYValues(),errorBars);
 		else
-			chart.addSeries(serieName, getXValues(), getYValues());
+			chart.addSeries(getSerieName(), getXValues(), getYValues());
 		
 	    frame.repaint();
 	}
@@ -99,5 +100,16 @@ public abstract class Plotter {
 		}
 		return ans;
 	}
-
+	
+	protected String getSerieName(){
+		return serieName;
+	}
+	
+	protected void setSerieName(String serieName){
+		this.serieName = serieName;
+	}
+	
+	protected void modifySerieName(){
+		return;
+	}
 }

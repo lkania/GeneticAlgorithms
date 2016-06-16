@@ -33,6 +33,11 @@ public class Gen {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		
+		return ""+currentValue;
+	}
 
 	
 }

@@ -1,11 +1,12 @@
 package api.algorithm.mutation;
 
 
+import java.util.List;
+
+import api.RandomNumbers;
 import api.model.gen.Gen;
 import api.model.gen.GenFactory;
 import api.model.individual.Individual;
-
-import java.util.List;
 
 public class MultiGenMutation extends MutationAlgorithm{
 
@@ -22,7 +23,7 @@ public class MultiGenMutation extends MutationAlgorithm{
         List<Gen> gens = individual.getGens();
 
         for(int i=0;i<gens.size();i+=genGroupSize){
-            if(Math.random()<probability){
+            if(RandomNumbers.getInstance().getRandomNumber()<probability){
                 for(int j=i;j<i+genGroupSize;j++) {
                 	Gen newGen = genFactory.getRandomGen(j);
                     gens.set(j,newGen);

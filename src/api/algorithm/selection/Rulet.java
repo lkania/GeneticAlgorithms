@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import api.RandomNumbers;
 import api.model.individual.Individual;
 
 public class Rulet extends SelectionAlgorithm{
@@ -52,7 +53,7 @@ public class Rulet extends SelectionAlgorithm{
 	protected List<Double> getRandomValues(int qty){
 		List<Double> randomAccumulatedFitness = new ArrayList<Double>(getNumberOfSelected());
 		for(int i=0; i< getNumberOfSelected(); i++){
-			randomAccumulatedFitness.add(Math.random());
+			randomAccumulatedFitness.add(RandomNumbers.getInstance().getRandomNumber());
 		}
 		return randomAccumulatedFitness;
 		

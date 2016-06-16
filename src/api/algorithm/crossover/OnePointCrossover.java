@@ -1,10 +1,11 @@
 package api.algorithm.crossover;
 
-import api.model.gen.Gen;
-import api.model.individual.Individual;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import api.RandomNumbers;
+import api.model.gen.Gen;
+import api.model.individual.Individual;
 
 public class OnePointCrossover extends CrossoverAlgorithm {
 
@@ -14,7 +15,7 @@ public class OnePointCrossover extends CrossoverAlgorithm {
 		List<Gen> gensI1 = i1.getGens();
 		List<Gen> gensI2 = i2.getGens();
 
-		int index = (int) Math.random() * gensI1.size();
+		int index = (int) RandomNumbers.getInstance().getRandomNumber() * gensI1.size();
 
 		ArrayList<Gen> newGens1 = new ArrayList<>(gensI1.size());
 		ArrayList<Gen> newGens2 = new ArrayList<>(gensI1.size());

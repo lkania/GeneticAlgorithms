@@ -1,9 +1,10 @@
 package api.algorithm.replacement;
 
-import api.model.individual.Individual;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import api.RandomNumbers;
+import api.model.individual.Individual;
 
 public class RandomBetweenAllReplacement implements ReplacementAlgorithm {
 
@@ -15,7 +16,7 @@ public class RandomBetweenAllReplacement implements ReplacementAlgorithm {
         int range = newIndividuals.size() + poblation.size();
 
         for (int i = 0; i < poblation.size(); i++) {
-            int index = (int) (range * Math.random());
+            int index = (int) (range * RandomNumbers.getInstance().getRandomNumber());
             Individual individual;
 
             if (index < poblation.size()) {

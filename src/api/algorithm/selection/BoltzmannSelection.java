@@ -58,7 +58,7 @@ public class BoltzmannSelection extends Rulet {
 	}
 
 	private double getTemperature() {
-		return temperature * Math.exp(-generation);
+		return temperature/generation;
 	}
 
 }

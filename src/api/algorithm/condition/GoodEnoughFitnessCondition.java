@@ -8,7 +8,7 @@ public class GoodEnoughFitnessCondition implements EndCondition{
 
     private double expectedFitness;
 
-    public GoodEnoughFitnessCondition(int expectedFitness){
+    public GoodEnoughFitnessCondition(double expectedFitness){
         this.expectedFitness =expectedFitness;
     }
 

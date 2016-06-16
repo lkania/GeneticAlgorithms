@@ -31,7 +31,6 @@ public class SwitchesExample {
     	selectionAlgorithms.add(selectionAlgorithmOne);
     	selectionAlgorithms.add(selectionAlgorithmTwo);
     }
-    private static SelectionAlgorithm selectionAlgorithmThree = new CombineSelection(selectionAlgorithms);
     private static CrossoverAlgorithm crossoverAlgorithm = new OnePointCrossover();
     private static MutationAlgorithm mutationAlgorithm = new MutationClassic(0.003);
     private static ReplacementAlgorithm replacementAlgorithm = new RandomBetweenAllReplacement();
@@ -49,7 +48,7 @@ public class SwitchesExample {
     private static GenFactory genFactory=new SwitchesGenFactory(rangeOfGens);
 
     public static void main(String[] args){
-        Configuration configuration = new Configuration(selectionAlgorithmThree,crossoverAlgorithm,mutationAlgorithm,replacementAlgorithm,fitnessAlgorithm,poblationSize,genFactory);
+        Configuration configuration = new Configuration(selectionAlgorithms,crossoverAlgorithm,mutationAlgorithm,replacementAlgorithm,fitnessAlgorithm,poblationSize,genFactory);
 
        // configuration.addEndCondition(new GoodEnoughFitnessCondition(961));
         //configuration.addEndCondition(new MaximumGenerationsCondition(10));

@@ -3,16 +3,13 @@ package api.algorithm.selection;
 import java.util.ArrayList;
 import java.util.List;
 
+import api.RandomNumbers;
 import api.model.individual.Individual;
 
 public class DeterministicTournament extends SelectionAlgorithm{
 	private int numberOfIndividuals = 0;
 
-	public DeterministicTournament(int numberOfSelected) {
-		super(numberOfSelected);
-		numberOfIndividuals = (int)(numberOfSelected *1.5);
-		
-	}
+	
 	
 	public DeterministicTournament(int numberOfSelected, int numberOfIndividuals) {
 		super(numberOfSelected);
@@ -33,7 +30,7 @@ public class DeterministicTournament extends SelectionAlgorithm{
 	protected List<Individual> selectRandomContestants(List<Individual> poblation){
 		List<Individual> res = new ArrayList<>();
 		for(int i=0; i<numberOfIndividuals; i++){
-			res.add(poblation.get((int) (Math.random()*poblation.size())));
+			res.add(poblation.get((int) (RandomNumbers.getInstance().getRandomNumber()*poblation.size())));
 		}
 		return res;
 	}

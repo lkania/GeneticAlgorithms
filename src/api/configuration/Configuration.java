@@ -5,6 +5,7 @@ import api.algorithm.crossover.CrossoverAlgorithm;
 import api.algorithm.fitness.FitnessAlgorithm;
 import api.algorithm.mutation.MutationAlgorithm;
 import api.algorithm.replacement.ReplacementAlgorithm;
+import api.algorithm.selection.CombineSelection;
 import api.algorithm.selection.SelectionAlgorithm;
 import api.model.gen.GenFactory;
 import api.model.individual.Individual;
@@ -23,11 +24,11 @@ public class Configuration {
     private int poblationSize;
     private GenFactory genFactory;
 
-    public Configuration(SelectionAlgorithm selectionAlgorithm, CrossoverAlgorithm crossoverAlgorithm, MutationAlgorithm mutationAlgorithm, ReplacementAlgorithm replacementAlgorithm, FitnessAlgorithm fitnessAlgorithm,  int poblationSize,GenFactory genFactory) {
+    public Configuration(List<SelectionAlgorithm> selectionAlgorithms, CrossoverAlgorithm crossoverAlgorithm, MutationAlgorithm mutationAlgorithm, ReplacementAlgorithm replacementAlgorithm, FitnessAlgorithm fitnessAlgorithm,  int poblationSize,GenFactory genFactory) {
         this.crossoverAlgorithm = crossoverAlgorithm;
         this.mutationAlgorithm = mutationAlgorithm;
         this.replacementAlgorithm = replacementAlgorithm;
-        this.selectionAlgorithm = selectionAlgorithm;
+        this.selectionAlgorithm = new CombineSelection(selectionAlgorithms);
         this.fitnessAlgorithm = fitnessAlgorithm;
         this.poblationSize = poblationSize;
         this.genFactory=genFactory;

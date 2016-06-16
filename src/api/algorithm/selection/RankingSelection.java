@@ -1,10 +1,10 @@
 package api.algorithm.selection;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import api.RandomNumbers;
 import api.model.individual.Individual;
 
 public class RankingSelection extends SelectionAlgorithm {
@@ -28,9 +28,9 @@ public class RankingSelection extends SelectionAlgorithm {
 		int randomIndex = 0;
 		
 		for(int i = 0; i < aux.size(); i++ ){
-			//probability += (aux.size()-i)/(aux.size()*(aux.size()+1)*0.5); 
+			
 			probability += ((aux.size()-i)*CONSTANT_B+CONSTANT_A)/(aux.size()*(CONSTANT_A+CONSTANT_B*(aux.size()+1)*0.5)); 
-
+			
 			while(randomNumbers.get(randomIndex) < probability ){
 				res.add(aux.get(i));
 				randomIndex ++;
@@ -41,13 +41,14 @@ public class RankingSelection extends SelectionAlgorithm {
 			}
 			
 		}
+
 		return res;
 	}
 	
 	protected List<Double> getRandomValues(int qty){
 		List<Double> randomAccumulatedFitness = new ArrayList<Double>(getNumberOfSelected());
 		for(int i=0; i< getNumberOfSelected(); i++){
-			randomAccumulatedFitness.add(Math.random());
+			randomAccumulatedFitness.add(RandomNumbers.getInstance().getRandomNumber());
 		}
 		return randomAccumulatedFitness;
 		

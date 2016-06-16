@@ -3,6 +3,7 @@ package api.algorithm.crossover;
 import java.util.ArrayList;
 import java.util.List;
 
+import api.RandomNumbers;
 import api.model.gen.Gen;
 import api.model.individual.Individual;
 
@@ -26,7 +27,7 @@ public class UniformCrossover extends CrossoverAlgorithm {
 			Gen gen1;
 			Gen gen2;
 
-			if (Math.random()<probability) {
+			if (RandomNumbers.getInstance().getRandomNumber()<probability) {
 				gen1 = gensI2.get(i);
 				gen2 = gensI1.get(i);
 			} else {
