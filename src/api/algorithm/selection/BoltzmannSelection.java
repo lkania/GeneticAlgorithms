@@ -31,14 +31,12 @@ public class BoltzmannSelection extends Rulet {
 		int randomIndex = 0;
 		double probabilityOfBeignSelected = 0;
 		for (Individual individual : poblation) {
-			System.out.println("Prob   "+  Math.exp(individual.getFitness() / getTemperature())/ partialBoltzmann+" ----"+individual.getFitness());
 			probabilityOfBeignSelected += Math.exp(individual.getFitness() / getTemperature()) / partialBoltzmann;
 			while (randomAccumulatedFitness.get(randomIndex) < probabilityOfBeignSelected) {
 				individuals.add(individual);
 				randomIndex++;
 				if (randomIndex == getNumberOfSelected()) {
 					generation++;
-					System.out.println("*******************");
 					return individuals;
 				}
 
