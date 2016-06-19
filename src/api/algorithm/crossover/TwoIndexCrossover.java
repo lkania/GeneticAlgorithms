@@ -39,7 +39,6 @@ public abstract class TwoIndexCrossover extends  CrossoverAlgorithm{
     private static List<List<Gen>> getSubGens(List<Gen> gens,int firstIndex,int secondIndex) {
 
         ArrayList<List<Gen>> ans = new ArrayList<>();
-
         ans.add(gens.subList(0, firstIndex));
         ans.add(gens.subList(firstIndex, secondIndex));
         ans.add(gens.subList(secondIndex, gens.size()));

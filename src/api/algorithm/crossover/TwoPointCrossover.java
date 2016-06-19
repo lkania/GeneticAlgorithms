@@ -9,8 +9,8 @@ public class TwoPointCrossover extends TwoIndexCrossover{
 
     @Override
     public void crossover(Individual i1, Individual i2, List<Individual> ans) {
-        int firstIndex = (int) (ans.size()*RandomNumbers.getInstance().getRandomNumber());
-        int secondIndex = (int) (ans.size()*RandomNumbers.getInstance().getRandomNumber());
+        int firstIndex = (int) (i1.getGens().size()*RandomNumbers.getInstance().getRandomNumber());
+        int secondIndex = (int) (i1.getGens().size()*RandomNumbers.getInstance().getRandomNumber());
 
         crossover(i1,i2,ans,Math.min(firstIndex,secondIndex),Math.max(firstIndex,secondIndex));
     }

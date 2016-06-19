@@ -36,9 +36,7 @@ public class GeneticAlgorithm {
         while (!algorithmEnded(configuration, poblation)) {
 
             List<Individual> selectedIndividualsForCrossover = selectionAlgorithmForCrossover.select(poblation);
-
             List<Individual> crossoveredIndividuals = crossoverAlgorithm.crossover(selectedIndividualsForCrossover);
-
             mutationAlgorithm.mutate(crossoveredIndividuals, genFactory);
 
             replacementAlgorithm.replace(crossoveredIndividuals, poblation);
