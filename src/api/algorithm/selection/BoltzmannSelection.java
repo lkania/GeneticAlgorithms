@@ -19,8 +19,9 @@ public class BoltzmannSelection extends Rulet {
 
 	@Override
 	public List<Individual> select(List<Individual> poblation) {
-
 		List<Individual> individuals = new ArrayList<Individual>(getNumberOfSelected());
+		if(getNumberOfSelected()==0)
+			return individuals; 
 
 		double partialBoltzmann = getTotalBoltzmann(poblation);
 

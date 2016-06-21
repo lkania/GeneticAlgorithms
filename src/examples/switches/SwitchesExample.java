@@ -16,6 +16,7 @@ import api.algorithm.replacement.ReplacementAlgorithm;
 import api.algorithm.selection.BoltzmannSelection;
 import api.algorithm.selection.CombineSelection;
 import api.algorithm.selection.Elitism;
+import api.algorithm.selection.RandomSelection;
 import api.algorithm.selection.SelectionAlgorithm;
 import api.configuration.Configuration;
 import api.model.gen.GenFactory;
@@ -24,21 +25,31 @@ import graph.MeanFitnessByGeneration;
 
 public class SwitchesExample {
 
-    private static SelectionAlgorithm selectionAlgorithmOne = new Elitism(6);
-    private static SelectionAlgorithm selectionAlgorithmTwo = new BoltzmannSelection(0,31.0);
-    private static List<SelectionAlgorithm> selectionAlgorithms = new ArrayList<>();
+    private static SelectionAlgorithm selectionAlgorithmForCrossoverOne = new Elitism(6);
+    private static SelectionAlgorithm selectionAlgorithmForCrossoverTwo = new BoltzmannSelection(0,31.0);
+    private static List<SelectionAlgorithm> selectionAlgorithmsForCrossover = new ArrayList<>();
     static{
-    	selectionAlgorithms.add(selectionAlgorithmOne);
-    	selectionAlgorithms.add(selectionAlgorithmTwo);
+    	selectionAlgorithmsForCrossover.add(selectionAlgorithmForCrossoverOne);
+    	selectionAlgorithmsForCrossover.add(selectionAlgorithmForCrossoverTwo);
     }
+    
+
     private static CrossoverAlgorithm crossoverAlgorithm = new OnePointCrossover();
     private static MutationAlgorithm mutationAlgorithm = new MutationClassic(0.003);
-    private static ReplacementAlgorithm replacementAlgorithm = new RandomBetweenAllReplacement();
+    
+   
     private static FitnessAlgorithm fitnessAlgorithm = new SwitchFitness();
     private static List<Integer> rangeOfGens = new ArrayList<>();
     private static int poblationSize = 10;
-    private static int NUMBER_OF_SWITHES = 5;
+    
+    private static SelectionAlgorithm selectionAlgorithmForReplacementOne = new RandomSelection(poblationSize);
+    private static List<SelectionAlgorithm> selectionAlgorithmsForReplacement = new ArrayList<>();
+    static{
+    	selectionAlgorithmsForReplacement.add(selectionAlgorithmForReplacementOne);
+    }
+    private static ReplacementAlgorithm replacementAlgorithm = new RandomBetweenAllReplacement();
 
+    private static int NUMBER_OF_SWITHES = 5;
     static{
         for(int i=0;i<NUMBER_OF_SWITHES;i++){
             rangeOfGens.add(1);
@@ -48,7 +59,7 @@ public class SwitchesExample {
     private static GenFactory genFactory=new SwitchesGenFactory(rangeOfGens);
 
     public static void main(String[] args){
-        Configuration configuration = new Configuration(selectionAlgorithms,crossoverAlgorithm,mutationAlgorithm,replacementAlgorithm,fitnessAlgorithm,poblationSize,genFactory);
+        Configuration configuration = new Configuration(selectionAlgorithmsForCrossover,crossoverAlgorithm,mutationAlgorithm,selectionAlgorithmsForReplacement, replacementAlgorithm,fitnessAlgorithm,poblationSize,genFactory);
 
        // configuration.addEndCondition(new GoodEnoughFitnessCondition(961));
         //configuration.addEndCondition(new MaximumGenerationsCondition(10));

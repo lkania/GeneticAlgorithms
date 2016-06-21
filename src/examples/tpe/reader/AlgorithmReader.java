@@ -80,23 +80,31 @@ public class AlgorithmReader {
 			RandomNumbers.getInstance().setSeed(seed);
 		}
 
-		List<SelectionAlgorithm> selectionAlgorithms = new ArrayList<>();
-
-		getSelectionAlgorithm(prop.getProperty("selectionAlgorithmOne"), prop, selectionAlgorithms);
-		getSelectionAlgorithm(prop.getProperty("selectionAlgorithmTwo"), prop, selectionAlgorithms);
-		getSelectionAlgorithm(prop.getProperty("selectionAlgorithmThree"),
-		 prop, selectionAlgorithms);
+		List<SelectionAlgorithm> selectionAlgorithmsForCrossover = new ArrayList<>();
+				
+		getSelectionAlgorithm(prop.getProperty("selectionAlgorithmForCrossoverOne"),"ForCrossoverOne", prop, selectionAlgorithmsForCrossover);
+		getSelectionAlgorithm(prop.getProperty("selectionAlgorithmForCrossoverTwo"),"ForCrossoverTwo", prop, selectionAlgorithmsForCrossover);
+		getSelectionAlgorithm(prop.getProperty("selectionAlgorithmForCrossoverThree"),"ForCrossoverThree",
+		 prop, selectionAlgorithmsForCrossover);
 
 		CrossoverAlgorithm crossoverAlgorithm = getCrossoverAlgorithm(prop.getProperty("crossoverAlgorithm"),prop);
 
 		MutationAlgorithm mutationAlgorithm = getMutationAlgorithm(prop.getProperty("mutationAlgorithm"), prop);
 
+		
+
+		List<SelectionAlgorithm> selectionAlgorithmsForReplacement = new ArrayList<SelectionAlgorithm>();
+		getSelectionAlgorithm(prop.getProperty("selectionAlgorithmForReplacementOne"),"ForReplacementOne", prop, selectionAlgorithmsForReplacement);
+		getSelectionAlgorithm(prop.getProperty("selectionAlgorithmForReplacementTwo"),"ForReplacementTwo", prop, selectionAlgorithmsForReplacement);
+		getSelectionAlgorithm(prop.getProperty("selectionAlgorithmForReplacementThree"),"ForReplacementThree",
+		 prop, selectionAlgorithmsForReplacement);
 		ReplacementAlgorithm replacementAlgorithm = getReplacementAlgorithm(prop.getProperty("replacementAlgorithm"),
 				prop);
 
-		FitnessAlgorithm fitnessAlgorithm = new Defensor1Fitness();
 
+		FitnessAlgorithm fitnessAlgorithm = new Defensor1Fitness();
 		int poblationSize = Integer.parseInt(prop.getProperty("poblationSize"));
+
 
 		double deltaHeight = Double.parseDouble(prop.getProperty("deltaheight"));
 
@@ -109,8 +117,8 @@ public class AlgorithmReader {
 
 		GenFactory genFactory = new ArmorGenFactory(items, deltaHeight);
 
-		Configuration configuration = new Configuration(selectionAlgorithms, crossoverAlgorithm, mutationAlgorithm,
-				replacementAlgorithm, fitnessAlgorithm, poblationSize, genFactory);
+		Configuration configuration = new Configuration(selectionAlgorithmsForCrossover, crossoverAlgorithm, mutationAlgorithm,
+				selectionAlgorithmsForReplacement,replacementAlgorithm, fitnessAlgorithm, poblationSize, genFactory);
 
 		addContions(configuration, prop);
 
@@ -154,17 +162,13 @@ public class AlgorithmReader {
 
 		if (algorithm == null || algorithm.equals(""))
 			return null;
-		String qty = prop.getProperty("replaceQuantity");
-		int replaceQuantity = 0;
-		if (!qty.equals(""))
-			replaceQuantity = Integer.parseInt(qty);
 
 		switch (algorithm) {
 		case "RandomBetweenAll":
 			ans = new RandomBetweenAllReplacement();
 			break;
 		case "SeparateRandom":
-			ans = new SeparateRandomReplacement(replaceQuantity);
+			ans = new SeparateRandomReplacement();
 			break;
 		case "ReplaceAll":
 			ans = new ReplaceAll();
@@ -198,27 +202,26 @@ public class AlgorithmReader {
 
 	}
 
-	private int numberOfSelectedAlgorithm = 1;
 
-	private void getSelectionAlgorithm(String algorithm, Properties prop,
+	private int getSelectionAlgorithm(String algorithm,String tag, Properties prop,
 			List<SelectionAlgorithm> selectionAlgorithms) {
 		if (algorithm == null || algorithm.equals(""))
-			return;
+			return 0;
 
 		SelectionAlgorithm ans = null;
 
-		int numberOfSelected = Integer.parseInt(prop.getProperty("numberOfSelected" + numberOfSelectedAlgorithm++));
-
+		int numberOfSelected = Integer.parseInt(prop.getProperty("numberOfSelected" + tag));
+		
 		switch (algorithm) {
 		case "Elitism":
 			ans = new Elitism(numberOfSelected);
 			break;
 		case "Boltzmann":
-			double temperature = Double.parseDouble(prop.getProperty("temperature"));
+			double temperature = Double.parseDouble(prop.getProperty("temperature" + tag));
 			ans = new BoltzmannSelection(numberOfSelected, temperature);
 			break;
 		case "DeterministicTournament":
-			ans = new DeterministicTournament(numberOfSelected,Integer.parseInt(prop.getProperty("deterministicTournamentGroupSize")));
+			ans = new DeterministicTournament(numberOfSelected,Integer.parseInt(prop.getProperty("deterministicTournamentGroupSize"+tag)));
 			break;
 		case "ProbabilisticTournament":
 			ans = new ProbabilisticTournament(numberOfSelected);
@@ -238,7 +241,8 @@ public class AlgorithmReader {
 		}
 
 		selectionAlgorithms.add(ans);
-
+		
+		return numberOfSelected;
 	}
 
 	private static CrossoverAlgorithm getCrossoverAlgorithm(String algorithm,Properties prop) {

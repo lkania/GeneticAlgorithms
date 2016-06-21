@@ -16,6 +16,8 @@ public class Rulet extends SelectionAlgorithm{
 	@Override
 	public List<Individual> select(List<Individual> poblation) {
 		List<Individual> individuals = new ArrayList<Individual>(getNumberOfSelected());
+		if(getNumberOfSelected()==0)
+			return individuals;
 		
 		double totalFitness = getTotalFitness(poblation);
 		

@@ -21,6 +21,9 @@ public class RankingSelection extends SelectionAlgorithm {
 	public List<Individual> select(List<Individual> poblation) {
 		List<Individual> aux = new ArrayList<>();
 		List<Individual> res = new ArrayList<>();
+		if(getNumberOfSelected()==0)
+			return res;
+		
 		aux.addAll(poblation);
 		Collections.sort(aux);
 		List<Double> randomNumbers = getRandomValues(getNumberOfSelected());	

@@ -18,20 +18,23 @@ public class Configuration {
     private CrossoverAlgorithm crossoverAlgorithm;
     private MutationAlgorithm mutationAlgorithm;
     private ReplacementAlgorithm replacementAlgorithm;
-    private SelectionAlgorithm selectionAlgorithm;
+    private SelectionAlgorithm selectionAlgorithmForCrossover;
     private List<EndCondition> endConditions = new LinkedList<>();
     private FitnessAlgorithm fitnessAlgorithm;
     private int poblationSize;
     private GenFactory genFactory;
+	private SelectionAlgorithm selectionAlgorithmForReplacement;
 
-    public Configuration(List<SelectionAlgorithm> selectionAlgorithms, CrossoverAlgorithm crossoverAlgorithm, MutationAlgorithm mutationAlgorithm, ReplacementAlgorithm replacementAlgorithm, FitnessAlgorithm fitnessAlgorithm,  int poblationSize,GenFactory genFactory) {
+    public Configuration(List<SelectionAlgorithm> selectionAlgorithmsForCrossover, CrossoverAlgorithm crossoverAlgorithm, MutationAlgorithm mutationAlgorithm, List<SelectionAlgorithm> selectionAlgorithmsForReplacement, ReplacementAlgorithm replacementAlgorithm, FitnessAlgorithm fitnessAlgorithm,  int poblationSize,GenFactory genFactory) {
         this.crossoverAlgorithm = crossoverAlgorithm;
         this.mutationAlgorithm = mutationAlgorithm;
         this.replacementAlgorithm = replacementAlgorithm;
-        this.selectionAlgorithm = new CombineSelection(selectionAlgorithms);
+        this.selectionAlgorithmForCrossover = new CombineSelection(selectionAlgorithmsForCrossover);
         this.fitnessAlgorithm = fitnessAlgorithm;
         this.poblationSize = poblationSize;
         this.genFactory=genFactory;
+        this.selectionAlgorithmForReplacement = new CombineSelection(selectionAlgorithmsForReplacement);
+
     }
 
 
@@ -51,10 +54,13 @@ public class Configuration {
 		return replacementAlgorithm;
 	}
 
-	public SelectionAlgorithm getSelectionAlgorithm() {
-		return selectionAlgorithm;
+	public SelectionAlgorithm getSelectionAlgorithmForCrossover() {
+		return selectionAlgorithmForCrossover;
 	}
 
+	public SelectionAlgorithm getSelectionAlgorithmForReplacement() {
+		return selectionAlgorithmForReplacement;
+	}
 
 	public List<EndCondition> getEndConditions() {
 		return endConditions;

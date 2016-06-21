@@ -23,12 +23,14 @@ public class GeneticAlgorithm {
 
         notifyInitialPoblation(poblation);
 
-        SelectionAlgorithm selectionAlgorithmForCrossover = configuration.getSelectionAlgorithm();
+        SelectionAlgorithm selectionAlgorithmForCrossover = configuration.getSelectionAlgorithmForCrossover();
 
         CrossoverAlgorithm crossoverAlgorithm = configuration.getCrossoverAlgorithm();
         
         MutationAlgorithm mutationAlgorithm = configuration.getMutationAlgorithm();
-        
+
+        SelectionAlgorithm selectionAlgorithmForReplacement = configuration.getSelectionAlgorithmForReplacement();
+
         ReplacementAlgorithm replacementAlgorithm = configuration.getReplacementAlgorithm();
 
         GenFactory genFactory = configuration.getGenFactory();
@@ -39,7 +41,7 @@ public class GeneticAlgorithm {
             List<Individual> crossoveredIndividuals = crossoverAlgorithm.crossover(selectedIndividualsForCrossover);
             mutationAlgorithm.mutate(crossoveredIndividuals, genFactory);
 
-            replacementAlgorithm.replace(crossoveredIndividuals, poblation);
+            replacementAlgorithm.replace(crossoveredIndividuals, poblation, selectionAlgorithmForReplacement);
 
             notifyNewPoblation(poblation);
 
