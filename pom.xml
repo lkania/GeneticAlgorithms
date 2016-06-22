@@ -5,6 +5,47 @@
   <version>0.0.1-SNAPSHOT</version>
   
   
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<finalName>GeneticAlgorithm</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+			      <artifactId>maven-assembly-plugin</artifactId>
+			             <executions>
+                  <execution>
+                      <phase>package</phase>
+                      <goals>
+                          <goal>single</goal>
+                      </goals>
+                  </execution>
+              </executions>
+			      <configuration>
+			        <archive>
+			          <manifest>
+			             <addClasspath>true</addClasspath>
+							<mainClass>examples.tpe.reader.AlgorithmReader</mainClass>
+			          </manifest>
+			        </archive>
+			        <descriptorRefs>
+			          <descriptorRef>jar-with-dependencies</descriptorRef>
+			        </descriptorRefs>
+			      </configuration>
+			    </plugin>
+					
+		</plugins>
+	</build>
+  
+  
+  
+  
   <dependencies>
 		<dependency>
 			<groupId>org.knowm.xchart</groupId>
